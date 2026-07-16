@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#fff;font-family:'Inter',system-ui,sans-serif;}
+  .ph{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 2px,transparent 2px,transparent 10px);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font:500 11px/1.4 ui-monospace,Menlo,monospace;text-align:center}
+  a.jb-link{color:rgba(255,255,255,.8);text-decoration:none}
+  .jb-dd:hover .jb-dd-menu{display:block}
+  .jb-dd-menu a:hover{background:#f6f4ee}
+</style>
+</helmet>
+
+<header style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;padding:16px 56px;background:#fff;border-bottom:1px solid #eee">
+  <div style="display:flex;align-items:center;gap:8px">
+    <img src="assets/jibili-logo.png" alt="Jibili Express" style="height:60px;width:auto;margin:-10px 0">
+    <div style="display:flex;align-items:baseline;gap:2px"><span style="font:800 20px Inter;color:#d8232a">Jibili</span><span style="font:800 20px Inter;color:#2aa24c">Express</span></div>
+  </div>
+  <nav style="display:flex;align-items:center;gap:24px;font:600 14px Inter;flex-wrap:wrap">
+    <a class="jb-link" href="#">Accueil</a>
+    <div style="position:relative" class="jb-dd">
+      <a href="#" style="color:#4fd07a;text-decoration:none;display:flex;align-items:center;gap:4px">Services <span style="font-size:10px">▾</span></a>
+      <div class="jb-dd-menu" style="position:absolute;top:100%;left:0;padding-top:14px;display:none">
+        <div style="background:#fff;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:8px;min-width:190px">
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Commander vos repas</a>
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Se Faire Livrer</a>
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Faire ses courses</a>
+        </div>
+      </div>
+    </div>
+    <div style="position:relative" class="jb-dd">
+      <a href="#" style="color:rgba(255,255,255,.8);text-decoration:none;display:flex;align-items:center;gap:4px">Devenir Partenaire <span style="font-size:10px">▾</span></a>
+      <div class="jb-dd-menu" style="position:absolute;top:100%;left:0;padding-top:14px;display:none">
+        <div style="background:#fff;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:8px;min-width:170px">
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Restaurants</a>
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Pharmacie</a>
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Boutiques</a>
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Livreur</a>
+        </div>
+      </div>
+    </div>
+    <a class="jb-link" href="#">À propos</a>
+    <a class="jb-link" href="#">Contactez-nous</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:14px">
+    <div style="display:flex;background:rgba(255,255,255,.08);border-radius:20px;padding:4px">
+      <span style="padding:6px 10px;border-radius:16px;background:#2aa24c;color:#fff;font:700 11px Inter">FR</span>
+      <span style="padding:6px 10px;border-radius:16px;color:rgba(255,255,255,.6);font:700 11px Inter">EN</span>
+      <span style="padding:6px 10px;border-radius:16px;color:rgba(255,255,255,.6);font:700 11px Inter">AR</span>
+    </div>
+    <button style="background:#000;color:#fff;border:none;padding:8px 14px;border-radius:20px;font:600 11px Inter;cursor:pointer;display:flex;align-items:center;gap:6px"><span style="font-size:14px"></span>App Store</button>
+    <button style="background:#000;color:#fff;border:none;padding:8px 14px;border-radius:20px;font:600 11px Inter;cursor:pointer;display:flex;align-items:center;gap:6px"><span style="font-size:14px">▶</span>Google Play</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section style="position:relative;background:#161d18;overflow:hidden;padding:70px 56px">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1.5px,transparent 1.5px);background-size:16px 16px;opacity:.5"></div>
+  <div style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;max-width:1328px;margin:0 auto">
+    <div class="ph" style="height:440px;border-radius:20px;background-color:rgba(255,255,255,.06)">photo — plat savoureux prêt à commander</div>
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);color:#fff;font:700 12px Inter;padding:8px 16px;border-radius:20px;margin-bottom:24px">🍽️ SERVICE · REPAS</div>
+      <h1 style="font:800 46px/1.15 Inter;color:#fff;margin:0 0 8px">Commandez vos repas</h1>
+      <h1 style="font:800 46px/1.15 Inter;color:#4fd07a;margin:0 0 24px">préférés en un clic</h1>
+      <p style="font:400 17px/1.6 Inter;color:rgba(255,255,255,.7);margin:0 0 32px;max-width:460px">Parcourez des centaines de restaurants à Nouakchott et faites-vous livrer vos plats favoris, chauds et à temps.</p>
+      <button style="background:#2aa24c;color:#fff;border:none;padding:16px 28px;border-radius:12px;font:700 15px Inter;cursor:pointer">Voir les restaurants</button>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section style="padding:72px 56px;background:#fff;max-width:1328px;margin:0 auto">
+  <h2 style="font:800 30px Inter;color:#1c2620;margin:0 0 40px;text-align:center">Pourquoi commander avec Jibili Express</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+    <div style="background:#f6f4ee;border-radius:18px;padding:32px">
+      <div style="width:48px;height:48px;border-radius:12px;background:#eaf5ee;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px">🍽️</div>
+      <div style="font:700 17px Inter;color:#1c2620;margin-bottom:8px">Large choix</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Des centaines de restaurants locaux et internationaux, tous dans une seule application.</div>
+    </div>
+    <div style="background:#f6f4ee;border-radius:18px;padding:32px">
+      <div style="width:48px;height:48px;border-radius:12px;background:#eaf5ee;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px">⏱️</div>
+      <div style="font:700 17px Inter;color:#1c2620;margin-bottom:8px">Livraison rapide</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Vos plats livrés en 15 à 25 minutes en moyenne, partout à Nouakchott.</div>
+    </div>
+    <div style="background:#f6f4ee;border-radius:18px;padding:32px">
+      <div style="width:48px;height:48px;border-radius:12px;background:#eaf5ee;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px">📍</div>
+      <div style="font:700 17px Inter;color:#1c2620;margin-bottom:8px">Suivi en temps réel</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Suivez votre commande de la cuisine jusqu'à votre porte, à chaque étape.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="padding:0 56px 72px;background:#fff;max-width:1328px;margin:0 auto">
+  <h2 style="font:800 26px Inter;color:#1c2620;margin:0 0 32px;text-align:center">Comment ça marche</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+    <div style="text-align:center">
+      <div style="width:56px;height:56px;border-radius:50%;background:#161d18;color:#fff;font:800 20px Inter;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">1</div>
+      <div style="font:700 15px Inter;color:#1c2620;margin-bottom:6px">Choisissez un restaurant</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Parcourez les restaurants près de chez vous et leurs menus.</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:56px;height:56px;border-radius:50%;background:#161d18;color:#fff;font:800 20px Inter;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">2</div>
+      <div style="font:700 15px Inter;color:#1c2620;margin-bottom:6px">Passez votre commande</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Ajoutez vos plats au panier et payez en ligne ou à la livraison.</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:56px;height:56px;border-radius:50%;background:#161d18;color:#fff;font:800 20px Inter;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">3</div>
+      <div style="font:700 15px Inter;color:#1c2620;margin-bottom:6px">Régalez-vous</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Un livreur vous apporte votre repas rapidement, où que vous soyez.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section style="padding:56px;background:#f6f4ee;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;max-width:1328px;margin:0 auto;border-radius:24px 24px 0 0">
+  <div>
+    <h3 style="font:800 24px Inter;color:#1c2620;margin:0 0 8px">Envie de commander maintenant ?</h3>
+    <p style="font:400 15px Inter;color:#777;margin:0">Téléchargez l'application Jibili Express et commandez en quelques secondes.</p>
+  </div>
+  <button style="background:#2aa24c;color:#fff;border:none;padding:16px 30px;border-radius:12px;font:700 15px Inter;cursor:pointer;white-space:nowrap">Télécharger l'app</button>
+</section>
+
+<footer style="padding:44px 56px;background:#161d18;display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px">
+  <div style="display:flex;align-items:center;gap:8px">
+    <img src="assets/jibili-logo.png" alt="Jibili Express" style="height:36px;width:auto">
+    <div style="display:flex;align-items:baseline;gap:2px"><span style="font:800 16px Inter;color:#d8232a">Jibili</span><span style="font:800 16px Inter;color:#2aa24c">Express</span></div>
+  </div>
+  <div style="display:flex;gap:48px;font:500 13px Inter;color:rgba(255,255,255,.6);flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Produit</b><a class="jb-link" href="#">Restaurants</a><a class="jb-link" href="#">Boutiques</a><a class="jb-link" href="#">Pharmacies</a></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Entreprise</b><a class="jb-link" href="#">À propos</a><a class="jb-link" href="#">Contact</a></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Rejoindre</b><a class="jb-link" href="#">Devenir partenaire</a><a class="jb-link" href="#">Devenir livreur</a></div>
+  </div>
+</footer>
+
+</x-dc>
+</body>
+</html>
