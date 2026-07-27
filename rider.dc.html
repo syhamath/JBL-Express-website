@@ -114,17 +114,17 @@
       <p style="font:400 14px/1.6 Inter;color:#777;margin:0 0 24px">S'inscrire n'a jamais été aussi simple. Devenez livreur partenaire dès maintenant.</p>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <input type="text" value="{{ riderForm.firstName }}" onChange="{{ setRiderField('firstName') }}" placeholder="Prénom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
-          <input type="text" value="{{ riderForm.lastName }}" onChange="{{ setRiderField('lastName') }}" placeholder="Nom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+          <input type="text" value="{{ riderForm.firstName }}" onChange="{{ setRiderFirstName }}" placeholder="Prénom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+          <input type="text" value="{{ riderForm.lastName }}" onChange="{{ setRiderLastName }}" placeholder="Nom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         </div>
-        <input type="tel" value="{{ riderForm.phone }}" onChange="{{ setRiderField('phone') }}" placeholder="Numéro de téléphone *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
-        <select value="{{ riderForm.vehicleType }}" onChange="{{ setRiderField('vehicleType') }}" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <input type="tel" value="{{ riderForm.phone }}" onChange="{{ setRiderPhone }}" placeholder="Numéro de téléphone *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <select value="{{ riderForm.vehicleType }}" onChange="{{ setRiderVehicleType }}" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
           <option value="">Type de véhicule *</option>
           <option value="Scooter">Scooter</option>
           <option value="Vélo">Vélo</option>
           <option value="Utilitaire">Utilitaire</option>
         </select>
-        <input type="email" value="{{ riderForm.email }}" onChange="{{ setRiderField('email') }}" placeholder="Adresse e-mail (optionnel)" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <input type="email" value="{{ riderForm.email }}" onChange="{{ setRiderEmail }}" placeholder="Adresse e-mail (optionnel)" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         <label style="display:flex;gap:10px;align-items:center;font:400 13px Inter;color:#1c2620;cursor:pointer">
           <input type="checkbox" checked="{{ riderForm.accepted }}" onChange="{{ toggleRiderAccepted }}" style="width:18px;height:18px;accent-color:#2aa24c">J'accepte la <a href="#" style="color:#2aa24c">Politique de confidentialité</a> *
         </label>
@@ -296,11 +296,8 @@ class Component extends DCLogic {
     riderSubmitting: false,
     riderStatus: null
   };
-  setRiderField(field) {
-    return (e) => this.setState(s => ({ riderForm: { ...s.riderForm, [field]: e.target.value } }));
-  }
-  toggleRiderAccepted() {
-    return () => this.setState(s => ({ riderForm: { ...s.riderForm, accepted: !s.riderForm.accepted } }));
+  setRiderField(field, value) {
+    this.setState(s => ({ riderForm: { ...s.riderForm, [field]: value } }));
   }
   async submitRiderForm() {
     const f = this.state.riderForm;
@@ -337,8 +334,12 @@ class Component extends DCLogic {
       riderStatusBg: this.state.riderStatus === 'success' ? '#eaf5ee' : '#fdecea',
       riderStatusColor: this.state.riderStatus === 'success' ? '#2aa24c' : '#d8232a',
       riderSubmitLabel: this.state.riderSubmitting ? 'Envoi en cours...' : "S'inscrire",
-      setRiderField: (field) => this.setRiderField(field),
-      toggleRiderAccepted: this.toggleRiderAccepted(),
+      setRiderFirstName: (e) => this.setRiderField('firstName', e.target.value),
+      setRiderLastName: (e) => this.setRiderField('lastName', e.target.value),
+      setRiderPhone: (e) => this.setRiderField('phone', e.target.value),
+      setRiderVehicleType: (e) => this.setRiderField('vehicleType', e.target.value),
+      setRiderEmail: (e) => this.setRiderField('email', e.target.value),
+      toggleRiderAccepted: () => this.setState(s => ({ riderForm: { ...s.riderForm, accepted: !s.riderForm.accepted } })),
       submitRiderForm: () => this.submitRiderForm(),
       openServices: () => this.setState({ openDD: 'services' }),
       openPartner: () => this.setState({ openDD: 'partner' }),

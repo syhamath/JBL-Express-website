@@ -113,19 +113,19 @@
       <h2 style="font:800 24px Inter;color:#1c2620;margin:0 0 8px">Commencez à vendre avec Jibili Express</h2>
       <p style="font:400 14px/1.6 Inter;color:#777;margin:0 0 24px">S'inscrire n'a jamais été aussi simple. Devenez partenaire dès maintenant.</p>
       <div style="display:flex;flex-direction:column;gap:14px">
-        <input type="text" value="{{ partnerForm.businessName }}" onChange="{{ setPartnerField('businessName') }}" placeholder="Nom de l'établissement *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <input type="text" value="{{ partnerForm.businessName }}" onChange="{{ setPartnerBusinessName }}" placeholder="Nom de l'établissement *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <input type="text" value="{{ partnerForm.firstName }}" onChange="{{ setPartnerField('firstName') }}" placeholder="Prénom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
-          <input type="text" value="{{ partnerForm.lastName }}" onChange="{{ setPartnerField('lastName') }}" placeholder="Nom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+          <input type="text" value="{{ partnerForm.firstName }}" onChange="{{ setPartnerFirstName }}" placeholder="Prénom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+          <input type="text" value="{{ partnerForm.lastName }}" onChange="{{ setPartnerLastName }}" placeholder="Nom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         </div>
-        <select value="{{ partnerForm.category }}" onChange="{{ setPartnerField('category') }}" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <select value="{{ partnerForm.category }}" onChange="{{ setPartnerCategory }}" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
           <option value="">Type d'activité *</option>
           <option value="Restaurant">Restaurant</option>
           <option value="Boutique">Boutique</option>
           <option value="Pharmacie">Pharmacie</option>
           <option value="Autres">Autres</option>
         </select>
-        <input type="tel" value="{{ partnerForm.phone }}" onChange="{{ setPartnerField('phone') }}" placeholder="Numéro de téléphone *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <input type="tel" value="{{ partnerForm.phone }}" onChange="{{ setPartnerPhone }}" placeholder="Numéro de téléphone *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         <label style="display:flex;gap:10px;align-items:center;font:400 13px Inter;color:#1c2620;cursor:pointer">
           <input type="checkbox" checked="{{ partnerForm.accepted }}" onChange="{{ togglePartnerAccepted }}" style="width:18px;height:18px;accent-color:#2aa24c">J'accepte la <a href="#" style="color:#2aa24c">Politique de confidentialité</a> *
         </label>
@@ -327,11 +327,8 @@ class Component extends DCLogic {
     partnerSubmitting: false,
     partnerStatus: null
   };
-  setPartnerField(field) {
-    return (e) => this.setState(s => ({ partnerForm: { ...s.partnerForm, [field]: e.target.value } }));
-  }
-  togglePartnerAccepted() {
-    return () => this.setState(s => ({ partnerForm: { ...s.partnerForm, accepted: !s.partnerForm.accepted } }));
+  setPartnerField(field, value) {
+    this.setState(s => ({ partnerForm: { ...s.partnerForm, [field]: value } }));
   }
   async submitPartnerForm() {
     const f = this.state.partnerForm;
@@ -368,8 +365,12 @@ class Component extends DCLogic {
       partnerStatusBg: this.state.partnerStatus === 'success' ? '#eaf5ee' : '#fdecea',
       partnerStatusColor: this.state.partnerStatus === 'success' ? '#2aa24c' : '#d8232a',
       partnerSubmitLabel: this.state.partnerSubmitting ? 'Envoi en cours...' : "S'inscrire",
-      setPartnerField: (field) => this.setPartnerField(field),
-      togglePartnerAccepted: this.togglePartnerAccepted(),
+      setPartnerBusinessName: (e) => this.setPartnerField('businessName', e.target.value),
+      setPartnerFirstName: (e) => this.setPartnerField('firstName', e.target.value),
+      setPartnerLastName: (e) => this.setPartnerField('lastName', e.target.value),
+      setPartnerCategory: (e) => this.setPartnerField('category', e.target.value),
+      setPartnerPhone: (e) => this.setPartnerField('phone', e.target.value),
+      togglePartnerAccepted: () => this.setState(s => ({ partnerForm: { ...s.partnerForm, accepted: !s.partnerForm.accepted } })),
       submitPartnerForm: () => this.submitPartnerForm(),
       openServices: () => this.setState({ openDD: 'services' }),
       openPartner: () => this.setState({ openDD: 'partner' }),
