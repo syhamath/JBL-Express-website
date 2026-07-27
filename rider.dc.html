@@ -114,21 +114,24 @@
       <p style="font:400 14px/1.6 Inter;color:#777;margin:0 0 24px">S'inscrire n'a jamais été aussi simple. Devenez livreur partenaire dès maintenant.</p>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <input type="text" placeholder="Prénom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
-          <input type="text" placeholder="Nom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+          <input type="text" value="{{ riderForm.firstName }}" onChange="{{ setRiderField('firstName') }}" placeholder="Prénom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+          <input type="text" value="{{ riderForm.lastName }}" onChange="{{ setRiderField('lastName') }}" placeholder="Nom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         </div>
-        <input type="tel" placeholder="Numéro de téléphone *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
-        <select style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <input type="tel" value="{{ riderForm.phone }}" onChange="{{ setRiderField('phone') }}" placeholder="Numéro de téléphone *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <select value="{{ riderForm.vehicleType }}" onChange="{{ setRiderField('vehicleType') }}" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
           <option value="">Type de véhicule *</option>
-          <option>Scooter</option>
-          <option>Vélo</option>
-          <option>Utilitaire</option>
+          <option value="Scooter">Scooter</option>
+          <option value="Vélo">Vélo</option>
+          <option value="Utilitaire">Utilitaire</option>
         </select>
-        <input type="email" placeholder="Adresse e-mail (optionnel)" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <input type="email" value="{{ riderForm.email }}" onChange="{{ setRiderField('email') }}" placeholder="Adresse e-mail (optionnel)" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         <label style="display:flex;gap:10px;align-items:center;font:400 13px Inter;color:#1c2620;cursor:pointer">
-          <input type="checkbox" style="width:18px;height:18px;accent-color:#2aa24c">J'accepte la <a href="#" style="color:#2aa24c">Politique de confidentialité</a> *
+          <input type="checkbox" checked="{{ riderForm.accepted }}" onChange="{{ toggleRiderAccepted }}" style="width:18px;height:18px;accent-color:#2aa24c">J'accepte la <a href="#" style="color:#2aa24c">Politique de confidentialité</a> *
         </label>
-        <button style="width:100%;background:#2aa24c;color:#fff;border:none;padding:15px;border-radius:12px;font:700 15px Inter;cursor:pointer;margin-top:2px">S'inscrire</button>
+        <sc-if value="{{ riderStatus }}" hint-placeholder-val="{{ null }}">
+          <div style="font:600 13px Inter;padding:10px 14px;border-radius:8px;background:{{ riderStatusBg }};color:{{ riderStatusColor }}">{{ riderStatusMsg }}</div>
+        </sc-if>
+        <button onClick="{{ submitRiderForm }}" disabled="{{ riderSubmitting }}" style="width:100%;background:#2aa24c;color:#fff;border:none;padding:15px;border-radius:12px;font:700 15px Inter;cursor:pointer;margin-top:2px">{{ riderSubmitLabel }}</button>
       </div>
     </div>
 
@@ -287,9 +290,56 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { openDD: null };
+  state = {
+    openDD: null,
+    riderForm: { firstName: '', lastName: '', phone: '', vehicleType: '', email: '', accepted: false },
+    riderSubmitting: false,
+    riderStatus: null
+  };
+  setRiderField(field) {
+    return (e) => this.setState(s => ({ riderForm: { ...s.riderForm, [field]: e.target.value } }));
+  }
+  toggleRiderAccepted() {
+    return () => this.setState(s => ({ riderForm: { ...s.riderForm, accepted: !s.riderForm.accepted } }));
+  }
+  async submitRiderForm() {
+    const f = this.state.riderForm;
+    if (!f.firstName || !f.lastName || !f.phone || !f.vehicleType) {
+      this.setState({ riderStatus: 'error' });
+      return;
+    }
+    if (!f.accepted) {
+      this.setState({ riderStatus: 'error' });
+      return;
+    }
+    this.setState({ riderSubmitting: true, riderStatus: null });
+    try {
+      const res = await fetch('/api/rider-signup', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(f)
+      });
+      if (res.ok) {
+        this.setState({ riderStatus: 'success', riderSubmitting: false, riderForm: { firstName: '', lastName: '', phone: '', vehicleType: '', email: '', accepted: false } });
+      } else {
+        this.setState({ riderStatus: 'error', riderSubmitting: false });
+      }
+    } catch (err) {
+      this.setState({ riderStatus: 'error', riderSubmitting: false });
+    }
+  }
   renderVals() {
     return {
+      riderForm: this.state.riderForm,
+      riderSubmitting: this.state.riderSubmitting,
+      riderStatus: this.state.riderStatus,
+      riderStatusMsg: this.state.riderStatus === 'success' ? 'Merci ! Votre demande a bien été envoyée.' : this.state.riderStatus === 'error' ? 'Veuillez remplir tous les champs requis et accepter la politique.' : '',
+      riderStatusBg: this.state.riderStatus === 'success' ? '#eaf5ee' : '#fdecea',
+      riderStatusColor: this.state.riderStatus === 'success' ? '#2aa24c' : '#d8232a',
+      riderSubmitLabel: this.state.riderSubmitting ? 'Envoi en cours...' : "S'inscrire",
+      setRiderField: (field) => this.setRiderField(field),
+      toggleRiderAccepted: this.toggleRiderAccepted(),
+      submitRiderForm: () => this.submitRiderForm(),
       openServices: () => this.setState({ openDD: 'services' }),
       openPartner: () => this.setState({ openDD: 'partner' }),
       openLang: () => this.setState({ openDD: 'lang' }),

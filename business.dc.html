@@ -113,23 +113,26 @@
       <h2 style="font:800 24px Inter;color:#1c2620;margin:0 0 8px">Commencez à vendre avec Jibili Express</h2>
       <p style="font:400 14px/1.6 Inter;color:#777;margin:0 0 24px">S'inscrire n'a jamais été aussi simple. Devenez partenaire dès maintenant.</p>
       <div style="display:flex;flex-direction:column;gap:14px">
-        <input type="text" placeholder="Nom de l'établissement *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <input type="text" value="{{ partnerForm.businessName }}" onChange="{{ setPartnerField('businessName') }}" placeholder="Nom de l'établissement *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <input type="text" placeholder="Prénom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
-          <input type="text" placeholder="Nom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+          <input type="text" value="{{ partnerForm.firstName }}" onChange="{{ setPartnerField('firstName') }}" placeholder="Prénom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+          <input type="text" value="{{ partnerForm.lastName }}" onChange="{{ setPartnerField('lastName') }}" placeholder="Nom *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         </div>
-        <select style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <select value="{{ partnerForm.category }}" onChange="{{ setPartnerField('category') }}" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
           <option value="">Type d'activité *</option>
-          <option>Restaurant</option>
-          <option>Boutique</option>
-          <option>Pharmacie</option>
-          <option>Autres</option>
+          <option value="Restaurant">Restaurant</option>
+          <option value="Boutique">Boutique</option>
+          <option value="Pharmacie">Pharmacie</option>
+          <option value="Autres">Autres</option>
         </select>
-        <input type="tel" placeholder="Numéro de téléphone *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <input type="tel" value="{{ partnerForm.phone }}" onChange="{{ setPartnerField('phone') }}" placeholder="Numéro de téléphone *" style="width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
         <label style="display:flex;gap:10px;align-items:center;font:400 13px Inter;color:#1c2620;cursor:pointer">
-          <input type="checkbox" style="width:18px;height:18px;accent-color:#2aa24c">J'accepte la <a href="#" style="color:#2aa24c">Politique de confidentialité</a> *
+          <input type="checkbox" checked="{{ partnerForm.accepted }}" onChange="{{ togglePartnerAccepted }}" style="width:18px;height:18px;accent-color:#2aa24c">J'accepte la <a href="#" style="color:#2aa24c">Politique de confidentialité</a> *
         </label>
-        <button style="width:100%;background:#2aa24c;color:#fff;border:none;padding:15px;border-radius:12px;font:700 15px Inter;cursor:pointer;margin-top:2px">S'inscrire</button>
+        <sc-if value="{{ partnerStatus }}" hint-placeholder-val="{{ null }}">
+          <div style="font:600 13px Inter;padding:10px 14px;border-radius:8px;background:{{ partnerStatusBg }};color:{{ partnerStatusColor }}">{{ partnerStatusMsg }}</div>
+        </sc-if>
+        <button onClick="{{ submitPartnerForm }}" disabled="{{ partnerSubmitting }}" style="width:100%;background:#2aa24c;color:#fff;border:none;padding:15px;border-radius:12px;font:700 15px Inter;cursor:pointer;margin-top:2px">{{ partnerSubmitLabel }}</button>
       </div>
     </div>
 
@@ -318,9 +321,56 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { openDD: null };
+  state = {
+    openDD: null,
+    partnerForm: { businessName: '', firstName: '', lastName: '', category: '', phone: '', accepted: false },
+    partnerSubmitting: false,
+    partnerStatus: null
+  };
+  setPartnerField(field) {
+    return (e) => this.setState(s => ({ partnerForm: { ...s.partnerForm, [field]: e.target.value } }));
+  }
+  togglePartnerAccepted() {
+    return () => this.setState(s => ({ partnerForm: { ...s.partnerForm, accepted: !s.partnerForm.accepted } }));
+  }
+  async submitPartnerForm() {
+    const f = this.state.partnerForm;
+    if (!f.businessName || !f.firstName || !f.lastName || !f.category || !f.phone) {
+      this.setState({ partnerStatus: 'error' });
+      return;
+    }
+    if (!f.accepted) {
+      this.setState({ partnerStatus: 'error' });
+      return;
+    }
+    this.setState({ partnerSubmitting: true, partnerStatus: null });
+    try {
+      const res = await fetch('/api/partner-signup', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(f)
+      });
+      if (res.ok) {
+        this.setState({ partnerStatus: 'success', partnerSubmitting: false, partnerForm: { businessName: '', firstName: '', lastName: '', category: '', phone: '', accepted: false } });
+      } else {
+        this.setState({ partnerStatus: 'error', partnerSubmitting: false });
+      }
+    } catch (err) {
+      this.setState({ partnerStatus: 'error', partnerSubmitting: false });
+    }
+  }
   renderVals() {
     return {
+      partnerForm: this.state.partnerForm,
+      partnerSubmitting: this.state.partnerSubmitting,
+      partnerStatus: this.state.partnerStatus,
+      partnerStatusMsg: this.state.partnerStatus === 'success' ? 'Merci ! Votre demande a bien été envoyée.' : this.state.partnerStatus === 'error' ? 'Veuillez remplir tous les champs requis et accepter la politique.' : '',
+      partnerStatusBg: this.state.partnerStatus === 'success' ? '#eaf5ee' : '#fdecea',
+      partnerStatusColor: this.state.partnerStatus === 'success' ? '#2aa24c' : '#d8232a',
+      partnerSubmitLabel: this.state.partnerSubmitting ? 'Envoi en cours...' : "S'inscrire",
+      setPartnerField: (field) => this.setPartnerField(field),
+      togglePartnerAccepted: this.togglePartnerAccepted(),
+      submitPartnerForm: () => this.submitPartnerForm(),
       openServices: () => this.setState({ openDD: 'services' }),
       openPartner: () => this.setState({ openDD: 'partner' }),
       openLang: () => this.setState({ openDD: 'lang' }),
