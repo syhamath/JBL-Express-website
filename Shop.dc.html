@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#fff;font-family:'Inter',system-ui,sans-serif;}
+  .ph{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 2px,transparent 2px,transparent 10px);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font:500 11px/1.4 ui-monospace,Menlo,monospace;text-align:center}
+  a.jb-link{color:rgba(255,255,255,.8);text-decoration:none}
+  .jb-dd-menu a:hover{background:#f6f4ee}
+  .jb-no-scrollbar::-webkit-scrollbar{display:none}
+  .jb-dot{background:#e3e3e3;cursor:pointer;border:none;padding:0}
+  .jb-dot-1.active{background:#2aa24c}
+  .jb-dot-7.active{background:#2aa24c}
+  *{box-sizing:border-box}
+  .jb-menu-toggle{display:none}
+  .jb-mobile-panel{display:none}
+  #jb-mobile-check:checked ~ .jb-mobile-panel{display:flex !important}
+  @media (max-width:960px){
+    header{padding-left:20px !important;padding-right:20px !important}
+    .jb-desktop-nav{display:none !important}
+    .jb-menu-toggle{display:flex !important}
+    .jb-grid-2{grid-template-columns:1fr !important}
+    .jb-grid-3{grid-template-columns:1fr !important}
+    section{padding-left:20px !important;padding-right:20px !important}
+    footer{padding-left:20px !important;padding-right:20px !important;flex-direction:column !important;gap:28px !important;text-align:left}
+    .jb-hero-media{width:100% !important;max-width:340px !important;height:auto !important;min-height:0 !important}
+    .jb-road-wrap{overflow-x:auto}
+    .jb-road-inner{width:860px !important;max-width:none !important}
+    h1{font-size:32px !important}
+  }
+  @media (max-width:600px){
+    h1{font-size:27px !important}
+  }
+</style>
+</helmet>
+
+<header style="display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:#fff;border-bottom:1px solid #eee;max-width:1440px;margin:0 auto;gap:12px;position:relative;z-index:100">
+  <div style="display:flex;align-items:center;flex:none">
+    <img src="assets/jibili-logo.png" alt="Jibili Express" style="height:74px;width:auto;margin:-14px 0">
+    <div style="display:flex;align-items:baseline;gap:2px;margin-left:8px">
+      <span style="font:800 22px Inter;color:#d8232a">Jibili</span><span style="font:800 22px Inter;color:#2aa24c">Express</span>
+    </div>
+  </div>
+    <input type="checkbox" id="jb-mobile-check" style="display:none">
+    <label for="jb-mobile-check" class="jb-menu-toggle" style="display:none;cursor:pointer;align-items:center;justify-content:center;width:40px;height:40px;font-size:24px;color:#1c2620">☰</label>
+  <nav class="jb-desktop-nav" style="display:flex;align-items:center;gap:14px;font:600 13px Inter;white-space:nowrap;flex:none">
+    <a href="Home.dc.html" style="color:#1c2620;text-decoration:none">Accueil</a>
+    <div style="position:relative" class="jb-dd" onMouseEnter="{{ openServices }}" onMouseLeave="{{ closeDD }}">
+      <a href="#" style="color:#2aa24c;text-decoration:none;display:flex;align-items:center;gap:4px">Services<span style="font-size: 10px;">▾</span></a>
+      <div class="jb-dd-menu" style="position:absolute;top:100%;left:0;padding-top:14px;display:{{ servicesDisplay }}">
+        <div style="background:#fff;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:8px;min-width:190px">
+          <a href="Shop.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Faire ses courses</a>
+          <a href="Order.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Commander vos repas</a>
+          <a href="Delivery.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Se Faire Livrer</a>
+        </div>
+      </div>
+    </div>
+    <div style="position:relative" class="jb-dd" onMouseEnter="{{ openPartner }}" onMouseLeave="{{ closeDD }}">
+      <a href="#" style="color:#1c2620;text-decoration:none;display:flex;align-items:center;gap:4px">Devenir Partenaire<span style="font-size: 10px;">▾</span></a>
+      <div class="jb-dd-menu" style="position:absolute;top:100%;left:0;padding-top:14px;display:{{ partnerDisplay }}">
+        <div style="background:#fff;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:8px;min-width:170px">
+          <a href="business.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Commerces</a>
+          <a href="rider.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Livreurs</a>
+        </div>
+      </div>
+    </div>
+    <a href="#" style="color:#1c2620;text-decoration:none">À propos de Nous</a>
+    <a href="#" style="color:#1c2620;text-decoration:none">Contactez-nous</a>
+  </nav><div class="jb-desktop-nav" style="display:flex;align-items:center;gap:14px;justify-content:flex-end;flex:none;white-space:nowrap">
+    <div style="display:flex;align-items:center;gap:8px;font:700 14px Inter;color:#1c2620;white-space:nowrap">📞 +222 34 33 35 34</div>
+    <div style="width:1px;height:22px;background:rgba(0,0,0,.1)"></div>
+    <div style="position:relative" class="jb-dd" onMouseEnter="{{ openLang }}" onMouseLeave="{{ closeDD }}">
+      <div style="display:flex;align-items:center;gap:6px;color:#1c2620;cursor:pointer;padding:6px 10px;border-radius:20px;background:#f6f4ee">
+        <span style="font-size:16px">🌐</span><span style="font:700 12px Inter">FR</span>
+      </div>
+      <div class="jb-dd-menu" style="position:absolute;top:100%;right:0;padding-top:14px;display:{{ langDisplay }}">
+        <div style="background:#fff;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:8px;min-width:120px">
+          <a href="#" style="display:block;padding:10px 14px;color:#2aa24c;text-decoration:none;font:700 13px Inter;border-radius:6px">Français</a>
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">English</a>
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">العربية</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <label for="jb-mobile-check" class="jb-mobile-panel" style="position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:60;flex-direction:column;padding:24px 28px 40px;gap:2px;overflow-y:auto">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:20px"><span style="font-size:26px;color:#1c2620">✕</span></div>
+    <a href="Home.dc.html" style="padding:14px 0;color:#1c2620;text-decoration:none;font:700 16px Inter;border-bottom:1px solid #f0f0f0">Accueil</a>
+    <div style="padding:14px 0 4px;color:#8a8a8a;font:700 12px Inter;text-transform:uppercase;letter-spacing:.04em">Services</div>
+    <a href="Shop.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter">Faire ses courses</a>
+    <a href="Order.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter">Commander vos repas</a>
+    <a href="Delivery.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter;border-bottom:1px solid #f0f0f0">Se Faire Livrer</a>
+    <div style="padding:14px 0 4px;color:#8a8a8a;font:700 12px Inter;text-transform:uppercase;letter-spacing:.04em">Devenir Partenaire</div>
+    <a href="business.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter">Commerces</a>
+    <a href="rider.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter;border-bottom:1px solid #f0f0f0">Livreurs</a>
+    <a href="#" style="padding:14px 0;color:#1c2620;text-decoration:none;font:700 16px Inter;border-bottom:1px solid #f0f0f0">À propos de Nous</a>
+    <a href="#" style="padding:14px 0;color:#1c2620;text-decoration:none;font:700 16px Inter;border-bottom:1px solid #f0f0f0">Contactez-nous</a>
+    <div style="padding:20px 0 0;font:700 14px Inter;color:#1c2620">📞 +222 34 33 35 34</div>
+  </label>
+</header>
+
+<!-- HERO -->
+<section style="position:relative;background:#f6f4ee;overflow:hidden;padding:70px 56px">
+  <div class="jb-grid-2" style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;max-width:1328px;margin:0 auto">
+    <div class="jb-hero-media" style="height:440px;border-radius:20px;display:flex;align-items:center;justify-content:center">
+      <img src="uploads/basket-transparent.png" alt="Panier de courses Jibili Express" style="width:85%;height:auto;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(0,0,0,.15))">
+    </div>
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:#eaf5ee;color:#2aa24c;font:700 12px Inter;padding:8px 16px;border-radius:20px;margin-bottom:24px">🛒 SERVICE · COURSES</div>
+      <h1 style="font:800 46px/1.15 Inter;color:#1c2620;margin:0 0 8px">Faites vos courses</h1>
+      <h1 style="font:800 46px/1.15 Inter;color:#2aa24c;margin:0 0 24px">sans quitter chez vous</h1>
+      <p style="font:400 17px/1.6 Inter;color:#666;margin:0 0 32px;max-width:460px">Épiceries, marchés et supermarchés de votre quartier, livrés directement à votre porte à Nouakchott.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY CAROUSEL -->
+<section style="padding:72px 56px;background:#fff;max-width:1328px;margin:0 auto">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">
+    <h2 style="font:800 26px Inter;color:#1c2620;margin:0">Toutes vos courses <span style="color:#d8232a">du quotidien</span></h2>
+    <div style="display:flex;gap:8px">
+      <button type="button" onClick="{{ scrollCatStart }}" class="jb-dot jb-dot-1 active" style="width:8px;height:8px;border-radius:50%"></button>
+      <button type="button" onClick="{{ scrollCatEnd }}" class="jb-dot jb-dot-7" style="width:8px;height:8px;border-radius:50%"></button>
+    </div>
+  </div>
+  <div id="jbCatScroll" ref="{{ catScrollRef }}" style="display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:8px;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x mandatory" class="jb-no-scrollbar">
+<div id="jb-cat-1" style="flex:none;width:220px;height:320px;border-radius:20px;position:relative;overflow:hidden;background:transparent;scroll-snap-align:start;scroll-margin-left:20px">
+      <img src="uploads/CRS-3-bdc5f8f9.jpg" alt="Épicerie" style="width:100%;height:100%;object-fit:cover;border-radius:20px">
+      <div style="position:absolute;top:0;left:0;right:0;height:100px;border-radius:20px 20px 0 0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 60%)"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:110px;border-radius:0 0 20px 20px;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 60%)"></div>
+      <div style="position:absolute;top:16px;left:16px;right:16px;font:800 18px Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Épicerie</div>
+      <div style="position:absolute;bottom:16px;left:16px;right:16px;font:400 13px/1.4 Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Fruits, légumes frais du marché</div>
+    </div>
+<div id="jb-cat-2" style="flex:none;width:220px;height:320px;border-radius:20px;position:relative;overflow:hidden;background:transparent;scroll-snap-align:start;scroll-margin-left:20px">
+      <img src="uploads/CRS-1-213593d4.jpg" alt="Supermarché" style="width:100%;height:100%;object-fit:cover;border-radius:20px">
+      <div style="position:absolute;top:0;left:0;right:0;height:100px;border-radius:20px 20px 0 0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 60%)"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:110px;border-radius:0 0 20px 20px;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 60%)"></div>
+      <div style="position:absolute;top:16px;left:16px;right:16px;font:800 18px Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Supermarché</div>
+      <div style="position:absolute;bottom:16px;left:16px;right:16px;font:400 13px/1.4 Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Vos courses de tous les jours</div>
+    </div>
+<div id="jb-cat-3" style="flex:none;width:220px;height:320px;border-radius:20px;position:relative;overflow:hidden;background:transparent;scroll-snap-align:start;scroll-margin-left:20px">
+      <img src="uploads/CRS-7-c4e42645.jpg" alt="Santé &amp; Beauté" style="width:100%;height:100%;object-fit:cover;border-radius:20px">
+      <div style="position:absolute;top:0;left:0;right:0;height:100px;border-radius:20px 20px 0 0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 60%)"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:110px;border-radius:0 0 20px 20px;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 60%)"></div>
+      <div style="position:absolute;top:16px;left:16px;right:16px;font:800 18px Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Santé &amp; Beauté</div>
+      <div style="position:absolute;bottom:16px;left:16px;right:16px;font:400 13px/1.4 Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Soins, cosmétiques et bien-être</div>
+    </div>
+<div id="jb-cat-4" style="flex:none;width:220px;height:320px;border-radius:20px;position:relative;overflow:hidden;background:transparent;scroll-snap-align:start;scroll-margin-left:20px">
+      <img src="uploads/CRS-8-0b9148f5.jpg" alt="Gâteaux d'anniversaire" style="width:100%;height:100%;object-fit:cover;border-radius:20px">
+      <div style="position:absolute;top:0;left:0;right:0;height:100px;border-radius:20px 20px 0 0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 60%)"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:110px;border-radius:0 0 20px 20px;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 60%)"></div>
+      <div style="position:absolute;top:16px;left:16px;right:16px;font:800 18px Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Gâteaux d'anniversaire</div>
+      <div style="position:absolute;bottom:16px;left:16px;right:16px;font:400 13px/1.4 Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Faites plaisir à vos proches</div>
+    </div>
+<div id="jb-cat-5" style="flex:none;width:220px;height:320px;border-radius:20px;position:relative;overflow:hidden;background:transparent;scroll-snap-align:start;scroll-margin-left:20px">
+      <img src="uploads/CRS-5-8308e7c7.jpg" alt="Volaille" style="width:100%;height:100%;object-fit:cover;border-radius:20px">
+      <div style="position:absolute;top:0;left:0;right:0;height:100px;border-radius:20px 20px 0 0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 60%)"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:110px;border-radius:0 0 20px 20px;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 60%)"></div>
+      <div style="position:absolute;top:16px;left:16px;right:16px;font:800 18px Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Volaille</div>
+      <div style="position:absolute;bottom:16px;left:16px;right:16px;font:400 13px/1.4 Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Poulet et volailles fraîches</div>
+    </div>
+<div id="jb-cat-6" style="flex:none;width:220px;height:320px;border-radius:20px;position:relative;overflow:hidden;background:transparent;scroll-snap-align:start;scroll-margin-left:20px">
+      <img src="uploads/CRS-4-fd78f4d5.jpg" alt="Boucherie" style="width:100%;height:100%;object-fit:cover;border-radius:20px">
+      <div style="position:absolute;top:0;left:0;right:0;height:100px;border-radius:20px 20px 0 0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 60%)"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:110px;border-radius:0 0 20px 20px;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 60%)"></div>
+      <div style="position:absolute;top:16px;left:16px;right:16px;font:800 18px Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Boucherie</div>
+      <div style="position:absolute;bottom:16px;left:16px;right:16px;font:400 13px/1.4 Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Viandes fraîches sélectionnées</div>
+    </div>
+<div id="jb-cat-7" style="flex:none;width:220px;height:320px;border-radius:20px;position:relative;overflow:hidden;background:transparent;scroll-snap-align:start;scroll-margin-left:20px">
+      <img src="uploads/CRS-9.jpg" alt="Boulangerie &amp; Pâtisserie" style="width:100%;height:100%;object-fit:cover;border-radius:20px">
+      <div style="position:absolute;top:0;left:0;right:0;height:100px;border-radius:20px 20px 0 0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 60%)"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:110px;border-radius:0 0 20px 20px;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 60%)"></div>
+      <div style="position:absolute;top:16px;left:16px;right:16px;font:800 18px Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Boulangerie &amp; Pâtisserie</div>
+      <div style="position:absolute;bottom:16px;left:16px;right:16px;font:400 13px/1.4 Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Viennoiseries et pâtisseries fraîches</div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section style="padding:72px 56px;background:#fff;max-width:1328px;margin:0 auto">
+  <div class="jb-grid-2" style="display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:center">
+    <div style="position:relative;height:520px;display:flex;align-items:center;justify-content:center">
+      <img src="uploads/APP1.jpg" alt="Écran de recherche - App Jibili Express" style="position:absolute;left:0;width:230px;border-radius:28px;box-shadow:0 24px 50px rgba(0,0,0,.22);z-index:1">
+      <img src="uploads/APP3.jpg" alt="Détail article - App Jibili Express" style="position:absolute;left:150px;width:230px;border-radius:28px;box-shadow:0 24px 50px rgba(0,0,0,.22);z-index:2">
+    </div>
+    <div>
+      <h2 style="font:800 30px Inter;color:#1c2620;margin:0 0 32px">Pourquoi faire <span style="color:#d8232a">vos courses</span> avec Jibili</h2>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;gap:18px;align-items:flex-start">
+          <div style="width:14px;height:14px;border-radius:50%;background:#2aa24c;flex:none;margin-top:5px"></div>
+          <div>
+            <div style="font:700 17px Inter;color:#1c2620;margin-bottom:6px">Boutiques de votre quartier</div>
+            <div style="font:400 14px/1.6 Inter;color:#777">Épiceries, marchés et supermarchés que vous connaissez déjà, disponibles en ligne.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:18px;align-items:flex-start">
+          <div style="width:14px;height:14px;border-radius:50%;background:#2aa24c;flex:none;margin-top:5px"></div>
+          <div>
+            <div style="font:700 17px Inter;color:#1c2620;margin-bottom:6px">Produits frais</div>
+            <div style="font:400 14px/1.6 Inter;color:#777">Fruits, légumes et essentiels du quotidien sélectionnés avec soin par nos partenaires.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:18px;align-items:flex-start">
+          <div style="width:14px;height:14px;border-radius:50%;background:#2aa24c;flex:none;margin-top:5px"></div>
+          <div>
+            <div style="font:700 17px Inter;color:#1c2620;margin-bottom:6px">Livraison rapide</div>
+            <div style="font:400 14px/1.6 Inter;color:#777">Vos courses livrées en 15 à 20 minutes, sans avoir à sortir de chez vous.</div>
+          </div>
+        </div>
+      </div>
+      <a href="#" style="display:inline-block;margin-top:32px;background:#d8232a;color:#fff;text-decoration:none;font:700 15px Inter;padding:16px 32px;border-radius:30px">Télécharger l'application</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="padding:72px 56px;background:#fff;max-width:1328px;margin:0 auto">
+  <h2 style="font:800 26px Inter;color:#1c2620;margin:0 0 32px;text-align:center">Comment ça marche</h2>
+  <div class="jb-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+    <div style="text-align:center">
+      <div style="width:56px;height:56px;border-radius:50%;background:#d8232a;color:#fff;font:800 20px Inter;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">1</div>
+      <div style="font:700 15px Inter;color:#1c2620;margin-bottom:6px">Choisissez une boutique</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Parcourez les épiceries et supermarchés disponibles près de chez vous.</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:56px;height:56px;border-radius:50%;background:#2aa24c;color:#fff;font:800 20px Inter;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">2</div>
+      <div style="font:700 15px Inter;color:#1c2620;margin-bottom:6px">Ajoutez vos produits</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Remplissez votre panier avec vos produits habituels et validez votre commande.</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:56px;height:56px;border-radius:50%;background:#e8a13a;color:#fff;font:800 20px Inter;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">3</div>
+      <div style="font:700 15px Inter;color:#1c2620;margin-bottom:6px">Recevez vos courses</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Un livreur vous apporte vos achats directement à votre porte.</div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:44px 56px;background:#161d18;display:flex;justify-content:space-between;flex-wrap:wrap;gap:28px;border-top:1px solid rgba(255,255,255,.08)">
+  <div style="display:flex;align-items:center">
+    <img src="assets/jibili-logo.png" alt="Jibili Express" style="height:36px;width:auto">
+    <div style="display:flex;align-items:baseline;gap:2px;margin-left:8px">
+      <span style="font:800 18px Inter;color:#d8232a">Jibili</span><span style="font:800 18px Inter;color:#2aa24c">Express</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:48px;font:500 13px Inter;color:rgba(255,255,255,.6)">
+    <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Produit</b><a href="#" style="color:rgba(255,255,255,.6);text-decoration:none">Restaurants</a><a href="#" style="color:rgba(255,255,255,.6);text-decoration:none">Boutiques</a><a href="#" style="color:rgba(255,255,255,.6);text-decoration:none">Pharmacies</a></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Entreprise</b><a href="#" style="color:rgba(255,255,255,.6);text-decoration:none">À propos</a><a href="#" style="color:rgba(255,255,255,.6);text-decoration:none">Contact</a></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Rejoindre</b><a href="#" style="color:rgba(255,255,255,.6);text-decoration:none">Devenir partenaire</a><a href="#" style="color:rgba(255,255,255,.6);text-decoration:none">Devenir livreur</a></div>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  catScrollRef = React.createRef();
+  state = { openDD: null };
+  renderVals() {
+    return {
+      catScrollRef: this.catScrollRef,
+      openServices: () => this.setState({ openDD: 'services' }),
+      openPartner: () => this.setState({ openDD: 'partner' }),
+      openLang: () => this.setState({ openDD: 'lang' }),
+      closeDD: () => this.setState({ openDD: null }),
+      servicesDisplay: this.state.openDD === 'services' ? 'block' : 'none',
+      partnerDisplay: this.state.openDD === 'partner' ? 'block' : 'none',
+      langDisplay: this.state.openDD === 'lang' ? 'block' : 'none',
+      scrollCatStart: () => {
+        const el = this.catScrollRef.current;
+        if (el) el.scrollTo({ left: 0, behavior: 'smooth' });
+      },
+      scrollCatEnd: () => {
+        const el = this.catScrollRef.current;
+        if (el) el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
