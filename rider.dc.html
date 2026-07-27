@@ -302,11 +302,11 @@ class Component extends DCLogic {
   async submitRiderForm() {
     const f = this.state.riderForm;
     if (!f.firstName || !f.lastName || !f.phone || !f.vehicleType) {
-      this.setState({ riderStatus: 'error' });
+      this.setState({ riderStatus: 'validation' });
       return;
     }
     if (!f.accepted) {
-      this.setState({ riderStatus: 'error' });
+      this.setState({ riderStatus: 'validation' });
       return;
     }
     this.setState({ riderSubmitting: true, riderStatus: null });
@@ -319,10 +319,10 @@ class Component extends DCLogic {
       if (res.ok) {
         this.setState({ riderStatus: 'success', riderSubmitting: false, riderForm: { firstName: '', lastName: '', phone: '', vehicleType: '', email: '', accepted: false } });
       } else {
-        this.setState({ riderStatus: 'error', riderSubmitting: false });
+        this.setState({ riderStatus: 'server', riderSubmitting: false });
       }
     } catch (err) {
-      this.setState({ riderStatus: 'error', riderSubmitting: false });
+      this.setState({ riderStatus: 'server', riderSubmitting: false });
     }
   }
   renderVals() {
@@ -330,7 +330,7 @@ class Component extends DCLogic {
       riderForm: this.state.riderForm,
       riderSubmitting: this.state.riderSubmitting,
       riderStatus: this.state.riderStatus,
-      riderStatusMsg: this.state.riderStatus === 'success' ? 'Merci ! Votre demande a bien été envoyée.' : this.state.riderStatus === 'error' ? 'Veuillez remplir tous les champs requis et accepter la politique.' : '',
+      riderStatusMsg: this.state.riderStatus === 'success' ? 'Merci ! Votre demande a bien été envoyée.' : this.state.riderStatus === 'validation' ? 'Veuillez remplir tous les champs requis et accepter la politique.' : this.state.riderStatus === 'server' ? "Le formulaire fonctionne uniquement une fois le site publié sur Cloudflare Pages." : '',
       riderStatusBg: this.state.riderStatus === 'success' ? '#eaf5ee' : '#fdecea',
       riderStatusColor: this.state.riderStatus === 'success' ? '#2aa24c' : '#d8232a',
       riderSubmitLabel: this.state.riderSubmitting ? 'Envoi en cours...' : "S'inscrire",

@@ -333,11 +333,11 @@ class Component extends DCLogic {
   async submitPartnerForm() {
     const f = this.state.partnerForm;
     if (!f.businessName || !f.firstName || !f.lastName || !f.category || !f.phone) {
-      this.setState({ partnerStatus: 'error' });
+      this.setState({ partnerStatus: 'validation' });
       return;
     }
     if (!f.accepted) {
-      this.setState({ partnerStatus: 'error' });
+      this.setState({ partnerStatus: 'validation' });
       return;
     }
     this.setState({ partnerSubmitting: true, partnerStatus: null });
@@ -350,10 +350,10 @@ class Component extends DCLogic {
       if (res.ok) {
         this.setState({ partnerStatus: 'success', partnerSubmitting: false, partnerForm: { businessName: '', firstName: '', lastName: '', category: '', phone: '', accepted: false } });
       } else {
-        this.setState({ partnerStatus: 'error', partnerSubmitting: false });
+        this.setState({ partnerStatus: 'server', partnerSubmitting: false });
       }
     } catch (err) {
-      this.setState({ partnerStatus: 'error', partnerSubmitting: false });
+      this.setState({ partnerStatus: 'server', partnerSubmitting: false });
     }
   }
   renderVals() {
@@ -361,7 +361,7 @@ class Component extends DCLogic {
       partnerForm: this.state.partnerForm,
       partnerSubmitting: this.state.partnerSubmitting,
       partnerStatus: this.state.partnerStatus,
-      partnerStatusMsg: this.state.partnerStatus === 'success' ? 'Merci ! Votre demande a bien été envoyée.' : this.state.partnerStatus === 'error' ? 'Veuillez remplir tous les champs requis et accepter la politique.' : '',
+      partnerStatusMsg: this.state.partnerStatus === 'success' ? 'Merci ! Votre demande a bien été envoyée.' : this.state.partnerStatus === 'validation' ? 'Veuillez remplir tous les champs requis et accepter la politique.' : this.state.partnerStatus === 'server' ? "Le formulaire fonctionne uniquement une fois le site publié sur Cloudflare Pages." : '',
       partnerStatusBg: this.state.partnerStatus === 'success' ? '#eaf5ee' : '#fdecea',
       partnerStatusColor: this.state.partnerStatus === 'success' ? '#2aa24c' : '#d8232a',
       partnerSubmitLabel: this.state.partnerSubmitting ? 'Envoi en cours...' : "S'inscrire",
