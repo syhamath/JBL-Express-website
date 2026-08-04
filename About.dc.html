@@ -7,13 +7,12 @@
 </head>
 <body>
 <x-dc>
-<helmet data-dc-atomics>
+<helmet data-dc-atomics="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <style>
   body{margin:0;background:#fff;font-family:'Inter',system-ui,sans-serif;}
-  .ph{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 2px,transparent 2px,transparent 10px);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font:500 11px/1.4 ui-monospace,Menlo,monospace;text-align:center}
-  a.jb-link{color:rgba(255,255,255,.8);text-decoration:none}
+  a.jb-link{color:#1c2620;text-decoration:none}
   .jb-dd-menu a:hover{background:#f6f4ee}
   *{box-sizing:border-box}
   .jb-menu-toggle{display:none}
@@ -24,12 +23,8 @@
     .jb-desktop-nav{display:none !important}
     .jb-menu-toggle{display:flex !important}
     .jb-grid-2{grid-template-columns:1fr !important}
-    .jb-grid-3{grid-template-columns:1fr !important}
     section{padding-left:20px !important;padding-right:20px !important}
     footer{padding-left:20px !important;padding-right:20px !important;flex-direction:column !important;gap:28px !important;text-align:left}
-    .jb-hero-media{width:100% !important;max-width:340px !important;height:auto !important;min-height:0 !important}
-    .jb-road-wrap{overflow-x:auto}
-    .jb-road-inner{width:860px !important;max-width:none !important}
     h1{font-size:32px !important}
   }
   @media (max-width:600px){
@@ -38,6 +33,7 @@
 </style>
 </helmet>
 
+<!-- HEADER -->
 <header style="display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:#fff;border-bottom:1px solid #eee;max-width:1440px;margin:0 auto;gap:12px;position:relative;z-index:100">
   <div style="display:flex;align-items:center;flex:none">
     <img src="assets/jibili-logo.png" alt="Jibili Express" style="height:74px;width:auto;margin:-14px 0">
@@ -50,7 +46,7 @@
   <nav class="jb-desktop-nav" style="display:flex;align-items:center;gap:14px;font:600 13px Inter;white-space:nowrap;flex:none">
     <a href="Home.dc.html" style="color:#1c2620;text-decoration:none">Accueil</a>
     <div style="position:relative" class="jb-dd" onMouseEnter="{{ openServices }}" onMouseLeave="{{ closeDD }}">
-      <a href="#" style="color:#2aa24c;text-decoration:none;display:flex;align-items:center;gap:4px">Services<span style="font-size: 10px;">▾</span></a>
+      <a href="#" style="color:#1c2620;text-decoration:none;display:flex;align-items:center;gap:4px">Services<span style="font-size: 10px;">▾</span></a>
       <div class="jb-dd-menu" style="position:absolute;top:100%;left:0;padding-top:14px;display:{{ servicesDisplay }}">
         <div style="background:#fff;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:8px;min-width:190px">
           <a href="Shop.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Faire ses courses</a>
@@ -68,7 +64,7 @@
         </div>
       </div>
     </div>
-    <a href="About.dc.html" style="color:#1c2620;text-decoration:none">À propos de Nous</a>
+    <a href="#" style="color:#2aa24c;text-decoration:none">À propos de Nous</a>
     <a href="Contact.dc.html" style="color:#1c2620;text-decoration:none">Contactez-nous</a>
   </nav><div class="jb-desktop-nav" style="display:flex;align-items:center;gap:14px;justify-content:flex-end;flex:none;white-space:nowrap">
     <a href="#" style="display:flex;align-items:center;gap:6px;color:#fff;text-decoration:none;padding:6px 14px;border-radius:20px;background:#2aa24c;font:700 12px Inter">Connexion Partenaire</a>
@@ -96,59 +92,90 @@
     <div style="padding:14px 0 4px;color:#8a8a8a;font:700 12px Inter;text-transform:uppercase;letter-spacing:.04em">Devenir Partenaire</div>
     <a href="business.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter">Commerces</a>
     <a href="rider.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter;border-bottom:1px solid #f0f0f0">Livreurs</a>
-    <a href="About.dc.html" style="padding:14px 0;color:#1c2620;text-decoration:none;font:700 16px Inter;border-bottom:1px solid #f0f0f0">À propos de Nous</a>
+    <a href="#" style="padding:14px 0;color:#2aa24c;text-decoration:none;font:700 16px Inter;border-bottom:1px solid #f0f0f0">À propos de Nous</a>
     <a href="Contact.dc.html" style="padding:14px 0;color:#1c2620;text-decoration:none;font:700 16px Inter;border-bottom:1px solid #f0f0f0">Contactez-nous</a>
     <a href="#" style="margin-top:16px;background:#2aa24c;color:#fff;text-decoration:none;padding:14px;border-radius:12px;font:700 15px Inter;text-align:center">Connexion Partenaire</a>
   </label>
 </header>
 
 <!-- HERO -->
-<section style="position:relative;background:#161d18;overflow:hidden;padding:70px 56px">
-  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1.5px,transparent 1.5px);background-size:16px 16px;opacity:.5"></div>
-  <div class="jb-grid-2" style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;max-width:1328px;margin:0 auto">
-    <div class="jb-hero-media" style="border-radius:20px;overflow:hidden;height:440px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04)">
-      <img src="assets/rider.png" alt="Livreur Jibili Express" style="width:90%;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.4))">
-    </div>
-    <div>
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);color:#fff;font:700 12px Inter;padding:8px 16px;border-radius:20px;margin-bottom:24px">📦 SERVICE · LIVRAISON</div>
-      <h1 style="font:800 46px/1.15 Inter;color:#fff;margin:0 0 8px">Faites-vous livrer,</h1>
-      <h1 style="font:800 46px/1.15 Inter;color:#4fd07a;margin:0 0 24px">peu importe quoi</h1>
-      <p style="font:400 17px/1.6 Inter;color:rgba(255,255,255,.7);margin:0 0 32px;max-width:460px">Colis, documents ou achats — envoyez-les où qu'ils doivent aller à Nouakchott, avec le suivi de vos livreurs Jibili en temps réel.</p>
-      <button style="background:#2aa24c;color:#fff;border:none;padding:16px 28px;border-radius:12px;font:700 15px Inter;cursor:pointer">Demander une livraison</button>
+<section style="background:#f6f4ee;padding:70px 56px 56px;text-align:center">
+  <h1 style="font:800 40px/1.2 Inter;color:#1c2620;margin:0 0 12px">À propos de <span style="color:#2aa24c">nous</span></h1>
+  <p style="font:400 16px Inter;color:#777;margin:0;max-width:600px;margin:0 auto">Une entreprise née à Nouakchott, pensée pour durer et bâtie pour sa communauté.</p>
+</section>
+
+<!-- HISTOIRE -->
+<section style="padding:72px 56px;max-width:820px;margin:0 auto">
+  <div style="display:inline-block;background:rgba(216,35,42,.08);color:#d8232a;font:700 12px Inter;letter-spacing:.04em;padding:6px 14px;border-radius:20px;margin-bottom:18px">NOTRE HISTOIRE</div>
+  <p style="font:400 17px/1.75 Inter;color:#333;margin:0">Né en 2025 à Nouakchott, notre projet est parti d'une conviction simple : la technologie doit servir la communauté qui l'entoure. De la rencontre entre expertise technique et vision commerciale internationale est née une entreprise pensée pour et avec la Mauritanie.</p>
+</section>
+
+<!-- MISSION -->
+<section style="padding:72px 56px;background:#f6f4ee">
+  <div style="max-width:820px;margin:0 auto">
+    <div style="display:inline-block;background:rgba(42,162,76,.1);color:#2aa24c;font:700 12px Inter;letter-spacing:.04em;padding:6px 14px;border-radius:20px;margin-bottom:18px">NOTRE MISSION</div>
+    <p style="font:400 17px/1.75 Inter;color:#333;margin:0 0 32px">Nous ne construisons pas seulement des produits — nous construisons des opportunités pour la communauté locale.</p>
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div style="width:14px;height:14px;border-radius:50%;background:#2aa24c;flex:none;margin-top:6px"></div>
+        <div style="font:400 15.5px/1.6 Inter;color:#333"><b style="color:#1c2620">Créer de l'activité économique locale</b> — faire vivre l'économie mauritanienne, un commerçant à la fois.</div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div style="width:14px;height:14px;border-radius:50%;background:#2aa24c;flex:none;margin-top:6px"></div>
+        <div style="font:400 15.5px/1.6 Inter;color:#333"><b style="color:#1c2620">Lutter contre le chômage</b> — générer de vraies opportunités d'emploi, en particulier pour les jeunes.</div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div style="width:14px;height:14px;border-radius:50%;background:#2aa24c;flex:none;margin-top:6px"></div>
+        <div style="font:400 15.5px/1.6 Inter;color:#333"><b style="color:#1c2620">Autonomiser les femmes à faibles revenus</b> — leur donner un accès simple pour proposer et vendre leurs produits, sans les barrières habituelles.</div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div style="width:14px;height:14px;border-radius:50%;background:#2aa24c;flex:none;margin-top:6px"></div>
+        <div style="font:400 15.5px/1.6 Inter;color:#333"><b style="color:#1c2620">Ouvrir le commerce en ligne à tous</b> — permettre à n'importe quel commerçant ou artisan de vendre en ligne facilement, sans compétences techniques ni investissement lourd.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- BENEFITS -->
-<section style="padding:72px 56px;background:#fff;max-width:1328px;margin:0 auto">
-  <h2 style="font:800 30px Inter;color:#1c2620;margin:0 0 40px;text-align:center">Pourquoi utiliser Jibili pour vos livraisons</h2>
-  <div class="jb-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
-    <div style="background:#f6f4ee;border-radius:18px;padding:32px">
-      <div style="width:48px;height:48px;border-radius:12px;background:#fdecea;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px">🛵</div>
-      <div style="font:700 17px Inter;color:#1c2620;margin-bottom:8px">Livreurs à proximité</div>
-      <div style="font:400 14px/1.6 Inter;color:#777">Un réseau de livreurs disponibles partout à Nouakchott, prêts à intervenir rapidement.</div>
+<!-- VALEURS -->
+<section style="padding:72px 56px;max-width:1200px;margin:0 auto">
+  <h2 style="font:800 28px Inter;color:#1c2620;margin:0 0 40px;text-align:center">Nos <span style="color:#d8232a">valeurs</span></h2>
+  <div class="jb-grid-2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+    <div style="background:#f6f4ee;border-radius:16px;padding:28px">
+      <div style="font:700 16px Inter;color:#1c2620;margin-bottom:8px">Impact local</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Chaque projet que nous lançons doit avoir un bénéfice concret et mesurable pour la communauté mauritanienne.</div>
     </div>
-    <div style="background:#f6f4ee;border-radius:18px;padding:32px">
-      <div style="width:48px;height:48px;border-radius:12px;background:#fdecea;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px">📍</div>
-      <div style="font:700 17px Inter;color:#1c2620;margin-bottom:8px">Suivi en direct</div>
-      <div style="font:400 14px/1.6 Inter;color:#777">Suivez votre livreur sur la carte du départ jusqu'à l'arrivée de votre colis.</div>
+    <div style="background:#f6f4ee;border-radius:16px;padding:28px">
+      <div style="font:700 16px Inter;color:#1c2620;margin-bottom:8px">Inclusion économique</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Nous construisons des outils accessibles, pensés en priorité pour ceux qui en ont le plus besoin — commerçants informels, artisans, femmes entrepreneures.</div>
     </div>
-    <div style="background:#f6f4ee;border-radius:18px;padding:32px">
-      <div style="width:48px;height:48px;border-radius:12px;background:#fdecea;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px">🔒</div>
-      <div style="font:700 17px Inter;color:#1c2620;margin-bottom:8px">Sécurisé et fiable</div>
-      <div style="font:400 14px/1.6 Inter;color:#777">Vos objets et documents sont pris en charge avec soin, à chaque étape.</div>
+    <div style="background:#f6f4ee;border-radius:16px;padding:28px">
+      <div style="font:700 16px Inter;color:#1c2620;margin-bottom:8px">Exigence technique</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Chaque produit que nous construisons répond à des standards internationaux, sans compromis sur la qualité.</div>
+    </div>
+    <div style="background:#f6f4ee;border-radius:16px;padding:28px">
+      <div style="font:700 16px Inter;color:#1c2620;margin-bottom:8px">Ambition locale, vision globale</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Nos racines sont mauritaniennes ; notre ambition ne s'arrête pas à nos frontières.</div>
+    </div>
+    <div style="background:#f6f4ee;border-radius:16px;padding:28px">
+      <div style="font:700 16px Inter;color:#1c2620;margin-bottom:8px">Complémentarité</div>
+      <div style="font:400 14px/1.6 Inter;color:#777">Notre force vient de deux regards différents — technologie et commerce international — qui se rejoignent sur un même objectif.</div>
     </div>
   </div>
 </section>
 
-<!-- CTA STRIP -->
+<!-- CTA -->
+<section style="padding:64px 56px;text-align:center">
+  <p style="font:600 17px Inter;color:#1c2620;margin:0 0 20px">Envie de nous rejoindre ou de collaborer avec nous ?</p>
+  <a href="Contact.dc.html" style="display:inline-block;background:#2aa24c;color:#fff;text-decoration:none;padding:14px 34px;border-radius:12px;font:700 15px Inter">Contactez-nous</a>
+</section>
 
 <footer style="padding:44px 56px;background:#161d18;display:flex;justify-content:space-between;flex-wrap:wrap;gap:28px;border-top:1px solid rgba(255,255,255,.08)">
-  <div style="display:flex;align-items:center">
-    <img src="assets/jibili-logo.png" alt="Jibili Express" style="height:36px;width:auto">
-    <div style="display:flex;align-items:baseline;gap:2px;margin-left:8px">
-      <span style="font:800 18px Inter;color:#d8232a">Jibili</span><span style="font:800 18px Inter;color:#2aa24c">Express</span>
+  <div>
+    <div style="display:flex;align-items:center;margin-bottom:14px">
+      <img src="assets/jibili-logo.png" alt="Jibili Express" style="height:52px;width:auto;margin:-8px 0">
+      <span style="font:800 18px Inter;margin-left:4px"><span style="color:#d8232a">Jibili</span><span style="color:#2aa24c">Express</span></span>
     </div>
+    <p style="font:400 13px Inter;color:rgba(255,255,255,.5);max-width:260px;margin:0">La livraison qui connecte Nouakchott à ses restaurants, boutiques et pharmacies préférés.</p>
   </div>
   <div style="display:flex;gap:48px;font:500 13px Inter;color:rgba(255,255,255,.6)">
     <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Produit</b><a href="Order.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">Commander vos repas</a><a href="Shop.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">Faire ses courses</a><a href="Delivery.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">Se faire livrer</a></div>

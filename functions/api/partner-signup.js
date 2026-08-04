@@ -7,7 +7,7 @@ export async function onRequestPost({ request, env }) {
       return new Response(JSON.stringify({ ok: false, error: "Champs requis manquants." }), { status: 400 });
     }
 
-    const notifyTo = env.NOTIFY_EMAIL || "contact@jibiliexpress.com";
+    const notifyTo = env.NOTIFY_EMAIL || "support@jibiliexpress.app";
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -15,7 +15,7 @@ export async function onRequestPost({ request, env }) {
         "authorization": `Bearer ${env.RESEND_API_KEY}`
       },
       body: JSON.stringify({
-        from: "Jibili Express <onboarding@resend.dev>",
+        from: "Jibili Express <onboarding@jibiliexpress.app>",
         to: [notifyTo],
         subject: `Nouvelle inscription partenaire — ${businessName}`,
         text:

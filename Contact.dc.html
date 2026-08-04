@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#fff;font-family:'Inter',system-ui,sans-serif;}
+  a.jb-link{color:#1c2620;text-decoration:none}
+  input, textarea, select{font-family:'Inter',system-ui,sans-serif}
+  .jb-dd-menu a:hover{background:#f6f4ee}
+  *{box-sizing:border-box}
+  .jb-menu-toggle{display:none}
+  .jb-mobile-panel{display:none}
+  #jb-mobile-check:checked ~ .jb-mobile-panel{display:flex !important}
+  .jb-tab{cursor:pointer}
+  @media (max-width:960px){
+    header{padding-left:20px !important;padding-right:20px !important}
+    .jb-desktop-nav{display:none !important}
+    .jb-menu-toggle{display:flex !important}
+    .jb-grid-2{grid-template-columns:1fr !important}
+    section{padding-left:20px !important;padding-right:20px !important}
+    footer{padding-left:20px !important;padding-right:20px !important;flex-direction:column !important;gap:28px !important;text-align:left}
+    h1{font-size:32px !important}
+  }
+  @media (max-width:600px){
+    h1{font-size:27px !important}
+  }
+</style>
+</helmet>
+
+<!-- HEADER -->
+<header style="display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:#fff;border-bottom:1px solid #eee;max-width:1440px;margin:0 auto;gap:12px;position:relative;z-index:100">
+  <div style="display:flex;align-items:center;flex:none">
+    <img src="assets/jibili-logo.png" alt="Jibili Express" style="height:74px;width:auto;margin:-14px 0">
+    <div style="display:flex;align-items:baseline;gap:2px;margin-left:8px">
+      <span style="font:800 22px Inter;color:#d8232a">Jibili</span><span style="font:800 22px Inter;color:#2aa24c">Express</span>
+    </div>
+  </div>
+    <input type="checkbox" id="jb-mobile-check" style="display:none">
+    <label for="jb-mobile-check" class="jb-menu-toggle" style="display:none;cursor:pointer;align-items:center;justify-content:center;width:40px;height:40px;font-size:24px;color:#1c2620">☰</label>
+  <nav class="jb-desktop-nav" style="display:flex;align-items:center;gap:14px;font:600 13px Inter;white-space:nowrap;flex:none">
+    <a href="Home.dc.html" style="color:#1c2620;text-decoration:none">Accueil</a>
+    <div style="position:relative" class="jb-dd" onMouseEnter="{{ openServices }}" onMouseLeave="{{ closeDD }}">
+      <a href="#" style="color:#1c2620;text-decoration:none;display:flex;align-items:center;gap:4px">Services<span style="font-size: 10px;">▾</span></a>
+      <div class="jb-dd-menu" style="position:absolute;top:100%;left:0;padding-top:14px;display:{{ servicesDisplay }}">
+        <div style="background:#fff;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:8px;min-width:190px">
+          <a href="Shop.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Faire ses courses</a>
+          <a href="Order.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Commander vos repas</a>
+          <a href="Delivery.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Se Faire Livrer</a>
+        </div>
+      </div>
+    </div>
+    <div style="position:relative" class="jb-dd" onMouseEnter="{{ openPartner }}" onMouseLeave="{{ closeDD }}">
+      <a href="#" style="color:#1c2620;text-decoration:none;display:flex;align-items:center;gap:4px">Devenir Partenaire<span style="font-size: 10px;">▾</span></a>
+      <div class="jb-dd-menu" style="position:absolute;top:100%;left:0;padding-top:14px;display:{{ partnerDisplay }}">
+        <div style="background:#fff;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:8px;min-width:170px">
+          <a href="business.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Commerces</a>
+          <a href="rider.dc.html" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">Livreurs</a>
+        </div>
+      </div>
+    </div>
+    <a href="About.dc.html" style="color:#1c2620;text-decoration:none">À propos de Nous</a>
+    <a href="Contact.dc.html" style="color:#2aa24c;text-decoration:none">Contactez-nous</a>
+  </nav><div class="jb-desktop-nav" style="display:flex;align-items:center;gap:14px;justify-content:flex-end;flex:none;white-space:nowrap">
+    <a href="#" style="display:flex;align-items:center;gap:6px;color:#fff;text-decoration:none;padding:6px 14px;border-radius:20px;background:#2aa24c;font:700 12px Inter">Connexion Partenaire</a>
+    <div style="width:1px;height:22px;background:rgba(0,0,0,.1)"></div>
+    <div style="position:relative" class="jb-dd" onMouseEnter="{{ openLang }}" onMouseLeave="{{ closeDD }}">
+      <div style="display:flex;align-items:center;gap:6px;color:#1c2620;cursor:pointer;padding:6px 10px;border-radius:20px;background:#f6f4ee">
+        <span style="font-size:16px">🌐</span><span style="font:700 12px Inter">FR</span>
+      </div>
+      <div class="jb-dd-menu" style="position:absolute;top:100%;right:0;padding-top:14px;display:{{ langDisplay }}">
+        <div style="background:#fff;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:8px;min-width:120px">
+          <a href="#" style="display:block;padding:10px 14px;color:#2aa24c;text-decoration:none;font:700 13px Inter;border-radius:6px">Français</a>
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">English</a>
+          <a href="#" style="display:block;padding:10px 14px;color:#1c2620;text-decoration:none;font:600 13px Inter;border-radius:6px">العربية</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <label for="jb-mobile-check" class="jb-mobile-panel" style="position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:60;flex-direction:column;padding:24px 28px 40px;gap:2px;overflow-y:auto">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:20px"><span style="font-size:26px;color:#1c2620">✕</span></div>
+    <a href="Home.dc.html" style="padding:14px 0;color:#1c2620;text-decoration:none;font:700 16px Inter;border-bottom:1px solid #f0f0f0">Accueil</a>
+    <div style="padding:14px 0 4px;color:#8a8a8a;font:700 12px Inter;text-transform:uppercase;letter-spacing:.04em">Services</div>
+    <a href="Shop.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter">Faire ses courses</a>
+    <a href="Order.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter">Commander vos repas</a>
+    <a href="Delivery.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter;border-bottom:1px solid #f0f0f0">Se Faire Livrer</a>
+    <div style="padding:14px 0 4px;color:#8a8a8a;font:700 12px Inter;text-transform:uppercase;letter-spacing:.04em">Devenir Partenaire</div>
+    <a href="business.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter">Commerces</a>
+    <a href="rider.dc.html" style="padding:10px 0 10px 12px;color:#1c2620;text-decoration:none;font:600 15px Inter;border-bottom:1px solid #f0f0f0">Livreurs</a>
+    <a href="About.dc.html" style="padding:14px 0;color:#1c2620;text-decoration:none;font:700 16px Inter;border-bottom:1px solid #f0f0f0">À propos de Nous</a>
+    <a href="Contact.dc.html" style="padding:14px 0;color:#2aa24c;text-decoration:none;font:700 16px Inter;border-bottom:1px solid #f0f0f0">Contactez-nous</a>
+    <a href="#" style="margin-top:16px;background:#2aa24c;color:#fff;text-decoration:none;padding:14px;border-radius:12px;font:700 15px Inter;text-align:center">Connexion Partenaire</a>
+  </label>
+</header>
+
+<!-- PAGE HEADER -->
+<section style="position:relative;background:#f6f4ee;overflow:hidden;padding:70px 56px 50px;text-align:center">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1.5px,transparent 1.5px);background-size:16px 16px;opacity:.5"></div>
+  <h1 style="position:relative;z-index:1;font:800 40px/1.2 Inter;color:#1c2620;margin:0 0 12px">Contactez-<span style="color:#2aa24c">nous</span></h1>
+  <p style="position:relative;z-index:1;font:400 16px Inter;color:#777;margin:0;max-width:520px;margin:0 auto">Une question, un projet ou un souci en tant que partenaire ? Nous sommes là pour vous aider.</p>
+</section>
+
+<!-- TABS -->
+<section style="padding:56px 56px 0;max-width:900px;margin:0 auto">
+  <div style="display:flex;gap:12px;margin-bottom:36px;border-bottom:1px solid #eee">
+    <div onClick="{{ selectGeneral }}" class="jb-tab" style="padding:14px 4px;font:700 15px Inter;color:{{ generalTabColor }};border-bottom:3px solid {{ generalTabBorder }};margin-bottom:-1px">Question générale</div>
+    <div onClick="{{ selectSupport }}" class="jb-tab" style="padding:14px 4px;margin-left:24px;font:700 15px Inter;color:{{ supportTabColor }};border-bottom:3px solid {{ supportTabBorder }};margin-bottom:-1px">Support Partenaire</div>
+  </div>
+
+  <sc-if value="{{ isGeneralTab }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:560px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <input type="text" value="{{ generalForm.name }}" onChange="{{ setGeneralName }}" placeholder="Nom complet *" style="width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620">
+        <input type="email" value="{{ generalForm.email }}" onChange="{{ setGeneralEmail }}" placeholder="Adresse e-mail *" style="width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620">
+      </div>
+      <input type="text" value="{{ generalForm.subject }}" onChange="{{ setGeneralSubject }}" placeholder="Sujet *" style="width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620">
+      <textarea value="{{ generalForm.message }}" onChange="{{ setGeneralMessage }}" placeholder="Votre message *" rows="5" style="width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;resize:vertical"></textarea>
+      <sc-if value="{{ generalStatus }}" hint-placeholder-val="{{ null }}">
+        <div style="font:600 13px Inter;padding:10px 14px;border-radius:8px;background:{{ generalStatusBg }};color:{{ generalStatusColor }}">{{ generalStatusMsg }}</div>
+      </sc-if>
+      <button onClick="{{ submitGeneralForm }}" disabled="{{ generalSubmitting }}" style="align-self:flex-start;background:#2aa24c;color:#fff;border:none;padding:14px 30px;border-radius:12px;font:700 15px Inter;cursor:pointer">{{ generalSubmitLabel }}</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isSupportTab }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:560px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <input type="text" value="{{ supportForm.businessName }}" onChange="{{ setSupportBusinessName }}" placeholder="Nom de l'établissement *" style="width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620">
+        <input type="tel" value="{{ supportForm.phone }}" onChange="{{ setSupportPhone }}" placeholder="Numéro de téléphone *" style="width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620">
+      </div>
+      <input type="email" value="{{ supportForm.email }}" onChange="{{ setSupportEmail }}" placeholder="Adresse e-mail *" style="width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620">
+      <select value="{{ supportForm.category }}" onChange="{{ setSupportCategory }}" style="width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;background:#fff">
+        <option value="">Catégorie du problème *</option>
+        <option value="Commandes">Problème de commandes</option>
+        <option value="Paiements">Paiements et facturation</option>
+        <option value="Catalogue">Gestion du catalogue / menu</option>
+        <option value="Livraison">Livraison et livreurs</option>
+        <option value="Compte">Compte et accès au tableau de bord</option>
+        <option value="Technique">Problème technique</option>
+        <option value="Autres">Autres</option>
+      </select>
+      <textarea value="{{ supportForm.description }}" onChange="{{ setSupportDescription }}" placeholder="Décrivez votre problème en détail *" rows="5" style="width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font:400 14px Inter;color:#1c2620;resize:vertical"></textarea>
+      <sc-if value="{{ supportStatus }}" hint-placeholder-val="{{ null }}">
+        <div style="font:600 13px Inter;padding:10px 14px;border-radius:8px;background:{{ supportStatusBg }};color:{{ supportStatusColor }}">{{ supportStatusMsg }}</div>
+      </sc-if>
+      <button onClick="{{ submitSupportForm }}" disabled="{{ supportSubmitting }}" style="align-self:flex-start;background:#d8232a;color:#fff;border:none;padding:14px 30px;border-radius:12px;font:700 15px Inter;cursor:pointer">{{ supportSubmitLabel }}</button>
+    </div>
+  </sc-if>
+</section>
+
+<!-- CONTACT INFO -->
+<section style="padding:64px 56px 90px;max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px" class="jb-grid-3">
+  <div style="background:#f6f4ee;border-radius:16px;padding:26px;text-align:center">
+    <div style="font-size:22px;margin-bottom:10px">📞</div>
+    <div style="font:700 14px Inter;color:#1c2620;margin-bottom:4px">Téléphone</div>
+    <div style="font:400 13px Inter;color:#777">+222 34 33 35 34</div>
+  </div>
+  <div style="background:#f6f4ee;border-radius:16px;padding:26px;text-align:center">
+    <div style="font-size:22px;margin-bottom:10px">✉️</div>
+    <div style="font:700 14px Inter;color:#1c2620;margin-bottom:4px">Email</div>
+    <div style="font:400 13px Inter;color:#777">support@jibiliexpress.app</div>
+  </div>
+  <div style="background:#f6f4ee;border-radius:16px;padding:26px;text-align:center">
+    <div style="font-size:22px;margin-bottom:10px">📍</div>
+    <div style="font:700 14px Inter;color:#1c2620;margin-bottom:4px">Adresse</div>
+    <div style="font:400 13px Inter;color:#777">Nouakchott, Mauritanie</div>
+  </div>
+</section>
+
+<footer style="padding:44px 56px;background:#161d18;display:flex;justify-content:space-between;flex-wrap:wrap;gap:28px;border-top:1px solid rgba(255,255,255,.08)">
+  <div>
+    <div style="display:flex;align-items:center;margin-bottom:14px">
+      <img src="assets/jibili-logo.png" alt="Jibili Express" style="height:52px;width:auto;margin:-8px 0">
+      <span style="font:800 18px Inter;margin-left:4px"><span style="color:#d8232a">Jibili</span><span style="color:#2aa24c">Express</span></span>
+    </div>
+    <p style="font:400 13px Inter;color:rgba(255,255,255,.5);max-width:260px;margin:0">La livraison qui connecte Nouakchott à ses restaurants, boutiques et pharmacies préférés.</p>
+  </div>
+  <div style="display:flex;gap:48px;font:500 13px Inter;color:rgba(255,255,255,.6)">
+    <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Produit</b><a href="Order.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">Commander vos repas</a><a href="Shop.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">Faire ses courses</a><a href="Delivery.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">Se faire livrer</a></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Entreprise</b><a href="About.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">À propos</a><a href="Contact.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">Contact</a></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><b style="color:#fff">Rejoindre</b><a href="business.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">Devenir partenaire</a><a href="rider.dc.html" style="color:rgba(255,255,255,.6);text-decoration:none">Devenir livreur</a></div>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    openDD: null,
+    activeTab: 'general',
+    generalForm: { name: '', email: '', subject: '', message: '' },
+    generalSubmitting: false,
+    generalStatus: null,
+    supportForm: { businessName: '', phone: '', email: '', category: '', description: '' },
+    supportSubmitting: false,
+    supportStatus: null
+  };
+  setGeneralField(field, value) { this.setState(s => ({ generalForm: { ...s.generalForm, [field]: value } })); }
+  setSupportField(field, value) { this.setState(s => ({ supportForm: { ...s.supportForm, [field]: value } })); }
+  async submitGeneralForm() {
+    const f = this.state.generalForm;
+    if (!f.name || !f.email || !f.subject || !f.message) {
+      this.setState({ generalStatus: 'validation' });
+      return;
+    }
+    this.setState({ generalSubmitting: true, generalStatus: null });
+    try {
+      const res = await fetch('/api/contact-general', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(f)
+      });
+      if (res.ok) {
+        this.setState({ generalStatus: 'success', generalSubmitting: false, generalForm: { name: '', email: '', subject: '', message: '' } });
+      } else {
+        this.setState({ generalStatus: 'server', generalSubmitting: false });
+      }
+    } catch (err) {
+      this.setState({ generalStatus: 'server', generalSubmitting: false });
+    }
+  }
+  async submitSupportForm() {
+    const f = this.state.supportForm;
+    if (!f.businessName || !f.phone || !f.email || !f.category || !f.description) {
+      this.setState({ supportStatus: 'validation' });
+      return;
+    }
+    this.setState({ supportSubmitting: true, supportStatus: null });
+    try {
+      const res = await fetch('/api/contact-support', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(f)
+      });
+      if (res.ok) {
+        this.setState({ supportStatus: 'success', supportSubmitting: false, supportForm: { businessName: '', phone: '', email: '', category: '', description: '' } });
+      } else {
+        this.setState({ supportStatus: 'server', supportSubmitting: false });
+      }
+    } catch (err) {
+      this.setState({ supportStatus: 'server', supportSubmitting: false });
+    }
+  }
+  renderVals() {
+    const isGeneralTab = this.state.activeTab === 'general';
+    return {
+      openServices: () => this.setState({ openDD: 'services' }),
+      openPartner: () => this.setState({ openDD: 'partner' }),
+      openLang: () => this.setState({ openDD: 'lang' }),
+      closeDD: () => this.setState({ openDD: null }),
+      servicesDisplay: this.state.openDD === 'services' ? 'block' : 'none',
+      partnerDisplay: this.state.openDD === 'partner' ? 'block' : 'none',
+      langDisplay: this.state.openDD === 'lang' ? 'block' : 'none',
+      isGeneralTab,
+      isSupportTab: !isGeneralTab,
+      selectGeneral: () => this.setState({ activeTab: 'general' }),
+      selectSupport: () => this.setState({ activeTab: 'support' }),
+      generalTabColor: isGeneralTab ? '#1c2620' : '#aaa',
+      generalTabBorder: isGeneralTab ? '#2aa24c' : 'transparent',
+      supportTabColor: !isGeneralTab ? '#1c2620' : '#aaa',
+      supportTabBorder: !isGeneralTab ? '#d8232a' : 'transparent',
+      generalForm: this.state.generalForm,
+      generalSubmitting: this.state.generalSubmitting,
+      generalStatus: this.state.generalStatus,
+      generalStatusMsg: this.state.generalStatus === 'success' ? 'Merci ! Votre message a bien été envoyé.' : this.state.generalStatus === 'validation' ? 'Veuillez remplir tous les champs requis.' : this.state.generalStatus === 'server' ? "Le formulaire fonctionne uniquement une fois le site publié." : '',
+      generalStatusBg: this.state.generalStatus === 'success' ? '#eaf5ee' : '#fdecea',
+      generalStatusColor: this.state.generalStatus === 'success' ? '#2aa24c' : '#d8232a',
+      generalSubmitLabel: this.state.generalSubmitting ? 'Envoi en cours...' : 'Envoyer',
+      setGeneralName: (e) => this.setGeneralField('name', e.target.value),
+      setGeneralEmail: (e) => this.setGeneralField('email', e.target.value),
+      setGeneralSubject: (e) => this.setGeneralField('subject', e.target.value),
+      setGeneralMessage: (e) => this.setGeneralField('message', e.target.value),
+      submitGeneralForm: () => this.submitGeneralForm(),
+      supportForm: this.state.supportForm,
+      supportSubmitting: this.state.supportSubmitting,
+      supportStatus: this.state.supportStatus,
+      supportStatusMsg: this.state.supportStatus === 'success' ? 'Merci ! Votre demande a été transmise à notre équipe support.' : this.state.supportStatus === 'validation' ? 'Veuillez remplir tous les champs requis.' : this.state.supportStatus === 'server' ? "Le formulaire fonctionne uniquement une fois le site publié." : '',
+      supportStatusBg: this.state.supportStatus === 'success' ? '#eaf5ee' : '#fdecea',
+      supportStatusColor: this.state.supportStatus === 'success' ? '#2aa24c' : '#d8232a',
+      supportSubmitLabel: this.state.supportSubmitting ? 'Envoi en cours...' : 'Envoyer la demande',
+      setSupportBusinessName: (e) => this.setSupportField('businessName', e.target.value),
+      setSupportPhone: (e) => this.setSupportField('phone', e.target.value),
+      setSupportEmail: (e) => this.setSupportField('email', e.target.value),
+      setSupportCategory: (e) => this.setSupportField('category', e.target.value),
+      setSupportDescription: (e) => this.setSupportField('description', e.target.value),
+      submitSupportForm: () => this.submitSupportForm()
+    };
+  }
+}
+</script>
+</body>
+</html>
